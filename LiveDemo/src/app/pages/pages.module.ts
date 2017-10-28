@@ -6,11 +6,20 @@ import {RouterModule} from "@angular/router";
 import {PagesRoutesModule} from "./pages-routes.module";
 
 import {NavigationComponent} from "./navigation/navigation.component";
-import {GooglesearchComponent} from "./googlesearch/googlesearch.component";
+import {
+  GsSimpleComponent,
+  GsThrottleComponent,
+  GsSwitchResultsComponent,
+  GsRxComponent,
+  SearchService
+} from "./googlesearch";
 import {FlyingtextComponent} from "./flyingtext/flyingtext.component";
 
 const COMPONENTS = [
-  GooglesearchComponent,
+  GsSimpleComponent,
+  GsThrottleComponent,
+  GsSwitchResultsComponent,
+  GsRxComponent,
   FlyingtextComponent,
   NavigationComponent
 ];
@@ -18,6 +27,7 @@ const COMPONENTS = [
 @NgModule({
   imports: [CommonModule, RouterModule, PagesRoutesModule],
   exports: COMPONENTS,
-  declarations: COMPONENTS
+  declarations: COMPONENTS,
+  providers: [SearchService]
 })
 export class PagesModule {}

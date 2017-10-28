@@ -11,26 +11,29 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/filter";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/switchMap";
+import "rxjs/add/operator/switch";
+
+import {SearchService} from "../Search.service";
 
 @Component({
-  selector: "app-googlesearch",
-  templateUrl: "./googlesearch.component.html",
-  styleUrls: ["./googlesearch.component.css"]
+  selector: "googlesearch",
+  templateUrl: "./gs-rx.component.html",
+  styleUrls: ["./gs-rx.component.css"]
 })
-export class GooglesearchComponent implements AfterContentInit {
+export class GsRxComponent implements AfterContentInit {
   results: string[] = [];
   @ViewChild("text") txb: ElementRef;
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
   ngAfterContentInit(): void {
-    Observable.fromEvent(this.txb.nativeElement, "keyup")
+    Observable.fromEvent(this.txb.nativeElement, "input")
       .map(_ => <string>this.txb.nativeElement.value)
       .filter(candidate => candidate.length > 2)
       .debounceTime(500)
       .distinctUntilChanged()
-      .switchMap(token => Promise.resolve(["a", "b"].concat(token)))
+      .map(token => this.searchService.search(token))
+      .switch()
       .subscribe(results => (this.results = results));
   }
 }
