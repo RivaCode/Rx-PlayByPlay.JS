@@ -10,8 +10,7 @@ import {
   GsSimpleComponent,
   GsThrottleComponent,
   GsSwitchResultsComponent,
-  GsRxComponent,
-  SearchService
+  GsRxComponent
 } from "./googlesearch";
 import {FlyingtextComponent} from "./flyingtext/flyingtext.component";
 
@@ -27,7 +26,6 @@ const COMPONENTS = [
 @NgModule({
   imports: [CommonModule, RouterModule, PagesRoutesModule],
   exports: COMPONENTS,
-  declarations: COMPONENTS,
-  providers: [SearchService]
+  declarations: COMPONENTS
 })
 export class PagesModule {}

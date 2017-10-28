@@ -4,5 +4,3 @@ export {
   GsSwitchResultsComponent
 } from "./switch-results/gs-switch-results.component";
 export {GsRxComponent} from "./rx/gs-rx.component";
-
-export {SearchService} from "./Search.service";

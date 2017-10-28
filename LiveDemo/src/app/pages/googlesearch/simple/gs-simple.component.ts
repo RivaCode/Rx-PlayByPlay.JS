@@ -1,14 +1,30 @@
-import {Component, AfterContentInit} from "@angular/core";
+import {Component} from "@angular/core";
+import {SearchService} from "../Search.service";
 
 @Component({
   selector: "googlesearch",
   templateUrl: "./gs-simple.component.html",
-  styleUrls: ["./gs-simple.component.css"]
+  styleUrls: ["./gs-simple.component.css"],
+  providers: [SearchService]
 })
-export class GsSimpleComponent implements AfterContentInit {
+export class GsSimpleComponent {
+  private lastSearchToken: string;
   results: string[] = [];
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
-  ngAfterContentInit(): void {}
+  textChanged(token: string) {
+    if (token.length < 3) {
+      return;
+    }
+
+    if (this.lastSearchToken === token) {
+      return;
+    }
+
+    this.lastSearchToken = token;
+    this.searchService
+      .searchAsPromise(this.lastSearchToken)
+      .then(results => (this.results = results));
+  }
 }

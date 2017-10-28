@@ -18,7 +18,8 @@ import {SearchService} from "../Search.service";
 @Component({
   selector: "googlesearch",
   templateUrl: "./gs-rx.component.html",
-  styleUrls: ["./gs-rx.component.css"]
+  styleUrls: ["./gs-rx.component.css"],
+  providers: [SearchService]
 })
 export class GsRxComponent implements AfterContentInit {
   results: string[] = [];
