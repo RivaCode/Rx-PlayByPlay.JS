@@ -16,7 +16,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, PagesRoutesModule, RouterModule],
+  imports: [CommonModule, RouterModule, PagesRoutesModule],
   exports: COMPONENTS,
   declarations: COMPONENTS
 })
