@@ -1,3 +1,8 @@
-<p>
-  flyingtext works!
-</p>
+<div #container
+     style="cursor: pointer; width: 100%; height:100%">
+  <span *ngFor="let c of characters"
+        [ngStyle]="{'position' : c.isAbsolute ? 'absolute' : 'initial' }"
+        style="position: absolute"
+        [style.top]="c.top + 'px'"
+        [style.left]="c.left + 'px'">{{c.char}}</span>
+</div>
