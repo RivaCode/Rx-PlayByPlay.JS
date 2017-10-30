@@ -1,9 +1,4 @@
-import {
-  Component,
-  AfterContentInit,
-  ViewChild,
-  ElementRef
-} from "@angular/core";
+import {Component, AfterContentInit, ViewChild, ElementRef} from "@angular/core";
 
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/fromEvent";
@@ -27,14 +22,5 @@ export class GsRxComponent implements AfterContentInit {
 
   constructor(private searchService: SearchService) {}
 
-  ngAfterContentInit(): void {
-    Observable.fromEvent(this.txb.nativeElement, "input")
-      .map(_ => <string>this.txb.nativeElement.value)
-      .filter(candidate => candidate.length > 2)
-      .debounceTime(500)
-      .distinctUntilChanged()
-      .map(token => this.searchService.search(token))
-      .switch()
-      .subscribe(results => (this.results = results));
-  }
+  ngAfterContentInit(): void {}
 }
