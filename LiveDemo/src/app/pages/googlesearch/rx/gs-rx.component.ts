@@ -22,5 +22,14 @@ export class GsRxComponent implements AfterContentInit {
 
   constructor(private searchService: SearchService) {}
 
-  ngAfterContentInit(): void {}
+  ngAfterContentInit(): void {
+    Observable.fromEvent(this.txb.nativeElement, "input")
+      .map(_ => <string>this.txb.nativeElement.value)
+      .filter(searchCandidate => searchCandidate.length > 2)
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .map(token => this.searchService.search(token))
+      .switch()
+      .subscribe(results => (this.results = results));
+  }
 }
